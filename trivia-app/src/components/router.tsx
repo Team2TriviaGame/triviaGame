@@ -5,15 +5,13 @@ import Login from "./login";
 import Game from "./game";
 
 export default function RouterComponent() {
-    const location = useLocation();
+
     
     return (
-        <ErrorBoundaryComponent key={location.pathname}>
-            <Switch>
-                <Route exact path="/" render= { () => <Redirect to="/login" />} />
-                <Route path="/login" component={Login} />
-                <Route path="/game" component={Game} />
-            </Switch>
-        </ErrorBoundaryComponent>
+        <Switch>
+            <Route exact path="/" render= { () => <Redirect to="/login" />} />
+            <Route path="/login" component={Login} />
+            <Route path="/game" component={Game} />
+        </Switch>
     );
 }
