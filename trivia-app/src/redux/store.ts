@@ -5,6 +5,7 @@ import reducer from './reducer';
 export interface TriviaAppState {
     username: string;
     score: number;
+    alert: string;
 }
 
 const store: Store<TriviaAppState, TriviaAppAction> = createStore(reducer);

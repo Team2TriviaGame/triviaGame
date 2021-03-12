@@ -1,7 +1,8 @@
 
 export enum TriviaAppActions {
     ChangeUsername = 'CHANGE_USERNAME',
-    ChangeScore = 'CHANGE_SCORE'
+    ChangeScore = 'CHANGE_SCORE',
+    ChangeAlert = 'CHANGE_ALERT'
 }
 
 export interface TriviaAppAction {
@@ -20,5 +21,12 @@ export function changeScore(score: number): TriviaAppAction {
     return {
         type: TriviaAppActions.ChangeScore,
         payload: score
+    };
+}
+
+export function changeAlert(alert: string): TriviaAppAction {
+    return {
+        type: TriviaAppActions.ChangeScore,
+        payload: alert
     };
 }

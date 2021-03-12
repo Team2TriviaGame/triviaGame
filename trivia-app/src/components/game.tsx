@@ -1,29 +1,36 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import '../css/game.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import databaseService from '../services/databaseService';
+import triviaService from '../services/triviaService';
+import QuestionComponent from './questionComponent';
+import Question from '../questions/question';
+import { TriviaAppState } from '../redux/store';
+
 
 export default function Game() {
+    // create state needed
+    const [questions, setQuestions] = useState([] as Question[]);
+    const score = useSelector((state: TriviaAppState) => state.score);
+    const dispatch = useDispatch();
 
-    //function for what happens when a user chooses an answer
-    function chooseAnswer() {
-
-    }
-        // compare to see if it was correct
-        // update score
-        // change question and answers
+    // make an api call
+    useEffect( () => {
+        triviaService.getQuestions().then(result => {
+            console.log(result);
+            setQuestions(result);
+        })
+    }, []);
 
     return (
         <React.Fragment>
-            <div>
-                <p>Question?</p>
-            </div>
-            <div>
-                <button onClick={chooseAnswer}>Answer1</button>
-                <button onClick={chooseAnswer}>Answer2</button>
-                <button onClick={chooseAnswer}>Answer3</button>
-                <button onClick={chooseAnswer}>Answer4</button>
-            </div>
+            <div>Score: {score}</div>
+            {questions.map((question, index) => {
+                return (
+                    <QuestionComponent question={question}/>
+                );
+            })}
         </React.Fragment>
     );
 }
